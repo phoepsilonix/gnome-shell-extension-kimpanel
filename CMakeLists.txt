@@ -37,7 +37,6 @@ set(extension_FILES
 
 set(schema_FILES
     schemas/org.gnome.shell.extensions.kimpanel.gschema.xml
-    schemas/gschemas.compiled
     )
 
 install(FILES ${extension_FILES} DESTINATION ${extensiondir})
