@@ -10,8 +10,6 @@ import {KimIndicator} from './indicator.js';
 import {KimMenu} from './menu.js';
 import * as Lib from './lib.js';
 
-var kimpanel = null;
-
 const KimpanelIface = '<node> \
 <interface name="org.kde.impanel"> \
 <signal name="MovePreeditCaret"> \
@@ -349,19 +347,19 @@ class Kimpanel extends GObject.Object {
 export default class KimpanelExtension extends Extension {
     constructor(...args) {
         super(...args);
-        this._settings = this.getSettings();
+        this.kimpanel = null;
     }
 
     enable() {
-        if (!kimpanel) {
-            kimpanel = new Kimpanel(this._settings);
+        if (!this.kimpanel) {
+            this.kimpanel = new Kimpanel(this.getSettings());
         }
     }
 
     disable() {
-        if (kimpanel) {
-            kimpanel.destroy();
-            kimpanel = null;
+        if (this.kimpanel) {
+            this.kimpanel.destroy();
+            this.kimpanel = null;
         }
     }
 }
